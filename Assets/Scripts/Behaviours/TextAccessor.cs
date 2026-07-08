@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class TextAccessor : MonoBehaviour
 {
-    
-    [SerializeField] private Dictionary<string, string> dic =  new Dictionary<string, string>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
