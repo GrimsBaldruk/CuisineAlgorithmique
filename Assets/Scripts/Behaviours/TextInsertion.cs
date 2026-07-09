@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class TextInsertion : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
-    [SerializeField] private GameObject _parent;
-    
+    [SerializeField] private TMP_Text _tmpText;
     private TMP_InputField _input;
-    private TextAccessor _accessor;
+    public string textToInsert;
 
     private void Start()
     {
@@ -18,10 +16,21 @@ public class TextInsertion : MonoBehaviour
     
     public void InstantiateText()
     {
-        Debug.Log("Instantiate Text");
-        var instance = Instantiate(_prefab, _parent.transform);
-        _accessor = instance.GetComponent<TextAccessor>();
-        _accessor.SetText(_input.text);
+        if (string.IsNullOrEmpty(_input.text)) return;
+        
+        Debug.Log("Add text Text");
+        
+        var prevText = _tmpText.text;
+        var newText = _input.text;
+
+        if (string.IsNullOrEmpty(prevText))
+        {
+            _tmpText.text = newText;
+            return;
+        }
+        
+        var finalText = $"{prevText}<br>{textToInsert}{" "}{newText}";
+        _tmpText.text = finalText;
     }
 
     public void ClearInput()
